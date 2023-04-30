@@ -1,0 +1,30 @@
+[book]
+authors = ["bingryan"]
+language = "cn"
+multilingual = false
+src = "src"
+title = "Prompt Engineering for Developers"
+
+[output.html]
+additional-css = ["theme/css/custom.css"]
+additional-js = ["theme/js/custom.js"]
+git-repository-url = "https://github.com/bingryan/Prompt-Engineering-for-Developers"
+edit-url-template = "https://github.com/bingryan/Prompt-Engineering-for-Developers/edit/main/{path}"
+
+[output.html.playground]
+editable = false         # allows editing the source code
+copyable = true          # include the copy button for copying code snippets
+copy-js = true           # includes the JavaScript for the code editor
+line-numbers = false     # displays line numbers for editable code
+runnable = true          # displays a run button for rust code
+
+[output.html.fold]
+enable = true
+level = 0
+
+[output.html.search]
+limit-results = 15
+
+
+[rust]
+edition = "2021"
