@@ -1,0 +1,1066 @@
+<!DOCTYPE HTML>
+<html lang="cn" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Prompt Engineering for Developers</title>
+        <meta name="robots" content="noindex" />
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="theme/css/custom.css">
+
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item affix "><a href="about.html">关于本指南</a></li><li class="chapter-item affix "><li class="part-title">ChatGPT Prompt Engineering for Developers</li><li class="chapter-item "><a href="ChatGPT-Prompt-Engineering-for-Developers/Introduction.html"><strong aria-hidden="true">1.</strong> Introduction(引言)</a></li><li class="chapter-item "><a href="ChatGPT-Prompt-Engineering-for-Developers/Guidelines.html"><strong aria-hidden="true">2.</strong> Guidelines(指南)</a></li><li class="chapter-item "><a href="ChatGPT-Prompt-Engineering-for-Developers/Iterative.html"><strong aria-hidden="true">3.</strong> Iterative(迭代)</a></li><li class="chapter-item "><a href="ChatGPT-Prompt-Engineering-for-Developers/Summarizing.html"><strong aria-hidden="true">4.</strong> Summarizing(摘要)</a></li><li class="chapter-item "><a href="ChatGPT-Prompt-Engineering-for-Developers/Inferring.html"><strong aria-hidden="true">5.</strong> Inferring(推理)</a></li><li class="chapter-item "><a href="ChatGPT-Prompt-Engineering-for-Developers/Transforming.html"><strong aria-hidden="true">6.</strong> Transforming(转换)</a></li><li class="chapter-item "><a href="ChatGPT-Prompt-Engineering-for-Developers/Expanding.html"><strong aria-hidden="true">7.</strong> Expanding(扩展)</a></li><li class="chapter-item "><a href="ChatGPT-Prompt-Engineering-for-Developers/Chatbot.html"><strong aria-hidden="true">8.</strong> Chatbot(聊天机器人)</a></li><li class="chapter-item "><a href="ChatGPT-Prompt-Engineering-for-Developers/Conclusion.html"><strong aria-hidden="true">9.</strong> Conclusion(总结)</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Prompt Engineering for Developers</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/bingryan/Prompt-Engineering-for-Developers" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <div class="sidetoc"><nav class="pagetoc"></nav></div>
+                    <main>
+                        <img src="./image/chatgpt.webp" />
+<p>本教程将介绍如何使用Chatbot GPT模型, 主要是面向开发者, 但是也适用于任何对GPT模型感兴趣的人.</p>
+<div style="break-before: page; page-break-before: always;"></div><p><a href="https://learn.deeplearning.ai/chatgpt-prompt-eng/lesson/1/introduction">ChatGPT Prompt Engineering for Developers</a> 是吴恩达老师和 OpenAI Isa Fulford 老师合作的一门课程，主要介绍了如何使用 GPT-3 的 API 来构建聊天机器人，以及如何使用 GPT-3 的 API 来完成一些常见的任务，比如总结(summarizing)、推断(inferring)、转换(transforming)、扩展(expanding)等等。</p>
+<p>对于如何使用,还是推荐大家去<a href="https://learn.deeplearning.ai/chatgpt-prompt-eng/lesson/1/introduction">ChatGPT Prompt Engineering for Developers</a> 提供的环境实操一下，这里只是对该课程的一些笔记和总结。仅供参考,如有错误,欢迎指正,提 PR 修复。</p>
+<h1 id="introduction引言"><a class="header" href="#introduction引言">Introduction(引言)</a></h1>
+<p><img src="ChatGPT-Prompt-Engineering-for-Developers/attachment/102909306092ccd89bcd5327feb52c3b.png" alt="" /></p>
+<p>欢迎来到这门面向开发人员的 ChatGPT 提示工程课程。 我很高兴有 Isa Fulford 和我一起教这个。她是 OpenAI 的技术人员，构建了流行的 ChatGPT 检索插件，她很大一部分工作一直在教人们如何在产品中使用 LLM 或大型语言模型技术。她还为教人们 prompting 的 OpenAI cookbook 做出了贡献。 很高兴能和你在一起。 我很高兴来到这里与大家分享一些有启发性的最佳实践。</p>
+<p>互联网上已经有很多关于 prompting 的材料，比如每个人都必须知道的 30 个提示的文章，其中很多都集中在 ChatGPT 的网络用户界面上，许多人都用它来做一些具体的、经常是一次性的任务。但我认为 LLM 大型语言模型,作为开发人员的强大之处在于使用对 LLM 的 API 调用来快速构建软件应用程序。</p>
+<p>事实上,我认为这仍然被低估了. 我在 AI Fund 的团队是 DeepLearning.AI 的姊妹公司。它一直在与许多初创公司合作，将这些技术应用于许多不同的应用程序并且很高兴看到 LLM API 可以让开发人员快速构建.因此，在本课程中，我们将与您分享一些您可以做什么的可能性以及如何做这些事情的最佳实践。本教程有很多材料要涵盖。</p>
+<p><img src="ChatGPT-Prompt-Engineering-for-Developers/attachment/79b0dfa55155602423688947535be704.png" alt="" />
+首先，您将学习一些促进软件开发的最佳实践然后我们将介绍一些常见的用例(cases)，总结(summarizing)、推断(inferring)、转换(transforming)、扩展(expanding)然后您将使用 LLM 构建一个聊天机器人.我们希望这会激发您对可以构建的新应用程序的想象力,</p>
+<p><img src="ChatGPT-Prompt-Engineering-for-Developers/attachment/b68db26b616c0fffd346d002b45269d9.png" alt="" />
+因此，在大型语言模型或 LLM 的开发中，大致有两种类型的 LLM，我将它们称为基础 LLM(base LLMs) 和指令调优 LLM(instruction tuned LLMs), base LLMs 已经过训练，可以根据文本训练数据预测下一个词 通常根据来自互联网和其他来源的大量数据进行训练 找出下一个最有可能出现的词是什么,</p>
+<p>因此，举例来说，如果你要提示这句话“从前有一只独角兽”，它可能会完成这个，即它可能会预测接下来的几个词是：和所有的独角兽朋友住在一个神奇的森林里</p>
+<p>但是如果你要提示这个:法国的首都是什么然后根据什么文章在互联网上可能有很有可能 base LLMs 将通过什么是法国最大的城市，法国的人口是多少等等. 因为互联网上的文章很有可能是关于法国国家的问答题列表(关于法国的问答题)
+相比之下，一个指令调优 LLM(instruction tuned LLMs)、 它也是 LLMs 研究和实践的一大动力所在. LLM(instruction tuned LLMs)已经被训练得能够听从指令。因此，如果你问它，法国的首都是什么？它可能会输出类似: 法国的首都是巴黎的信息</p>
+<p>因此，通常训练指令调优 LLM 的方式是 您从一个基础 LLM 开始，该基础 LLM 经过大量文本数据的训练，然后进一步训练它以使用作为指令的输入和输出对其进行微调，并尝试遵循这些指令指示
+然后经常使用称为 RLHF(reinforcement learning from human feedback) 的技术进一步完善, 使系统能够更好地提供帮助并遵循指示.因为指令调整的 LLMs 已经被训练成有帮助的、诚实的和无害的.</p>
+<p>因此，例如，他们不太可能输出有问题的文本，例如与基础 LLM 相比有毒的输出(toxic outputs)很多实际的使用场景已经转向了指令调整的 LLMs.你在互联网上找到的一些最佳实践可能更适合于的 base LLMs
+但对于今天的大多数实际应用，我们会建议大多数人专注于指令调整的 LLMs, 它更容易使用, 同时也让 OpenAI 和其他 LLM 公司的工作成为更安全、更一致.所以本课程将着重于指令调整的 LLMs 最佳实践</p>
+<p><img src="ChatGPT-Prompt-Engineering-for-Developers/attachment/d2d48193d95f335cb8aad96f04f9e585.png" alt="" />
+我想感谢 OpenAI 和 DeepLearning.ai 的团队 这对 Izzy 和我将要展示的材料做出了贡献。 我非常感谢 Andrew Main，Joe Palermo，来自 OpenAI 的 Boris Power、Ted Sanders 和 Lillian Weng 他们积极参与我们的头脑风暴材料、审查为这个短片整理课程的材料.我也很感谢深度学习 Geoff Ladwig、Eddy Shyu 和 Tommy Nelson .</p>
+<p>因此，当你使用调整过的 LLM 的指令时，请想一想,给另一个人的指令。他是一个聪明但不知道你的任务细节的人。
+所以，当一个 LLMs 不工作时，有时是因为指令不够清楚。</p>
+<p>例如，如果你说，请给我写一些关于艾伦图灵(Alan Turing) 此外，从清楚地角度来说,知道你是否希望文本集中在他的科学工作或他的个人生活或他在历史上的作用或其他方面，这可能是有帮助的，如果你指定你希望文本的语气是什么，它应该采取像专业记者会写的语气？还是说它更像一个随意的说明 希望 OMS 产生你想要的东西？</p>
+<p>当然，如果你想像自己要求，比方说，一个刚毕业的大学毕业生为你完成这项任务 如果你甚至可以指定他们应该提前阅读哪些文本片段来写这篇关于艾伦图灵(Alan Turing)的文章 那么这就更好了 那个成功的大学毕业生为你完成这个任务
+所以在下一个视频中，你会看到如何清晰和具体的例子，这是提示 OMS 的一个重要原则, 你还可以从提示的第二个原则中学习 给 LLM 思考的时间 所以，让我们继续看下一个视频</p>
+<h3 id="省流版本"><a class="header" href="#省流版本">省流版本</a></h3>
+<p><img src="ChatGPT-Prompt-Engineering-for-Developers/attachment/102909306092ccd89bcd5327feb52c3b.png" alt="" /></p>
+<p>男主是鼎鼎大名的吴恩达,女主是来自 OpenAI 的 Isa Fulford. 他俩要讲 prompting 的最佳实践. prompting 指的是 LLM(Large Language Models,大型语言模型)中输入的提示词.</p>
+<p><img src="ChatGPT-Prompt-Engineering-for-Developers/attachment/b68db26b616c0fffd346d002b45269d9.png" alt="" /></p>
+<p>LLM 大致有两种类型的 LLM: 基础 LLM(base LLMs) 和指令调优 LLM(instruction tuned LLMs):</p>
+<ul>
+<li>
+<p><strong>基础 LLM 功能</strong>: 你输入前面部分机器补充后面部分. 比如你输入:<code>从前有一只独角兽</code>, 机器会提示: <code>和所有的独角兽朋友住在一个神奇的森林里</code>. 连起来就是: <code>从前有一只独角兽和所有的独角兽朋友住在一个神奇的森林里</code></p>
+</li>
+<li>
+<p><strong>指令调优 LLM</strong>: 为问答式的功能, 它是在基础 LLM 上经过大量文本数据的训练,同时使用称为 RLHF(reinforcement learning from human feedback) 的技术进一步完善(主要是裁剪有害输出).</p>
+</li>
+</ul>
+<p>本教程的侧重点是讲指令调优 LLM</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="guidelines指南"><a class="header" href="#guidelines指南">Guidelines(指南)</a></h1>
+<p>OpenAI Isa Fulford 在本节中强调了 2 大 Prompting Principles, 使用这些原则来构建更好的提示:</p>
+<blockquote>
+<p><strong>Principle 1:</strong> Write clear and specific instructions(写清楚和具体的说明)</p>
+<p><strong>Principle 2:</strong> Give the model time to “think”(给模型时间“思考”)</p>
+</blockquote>
+<h3 id="principle-1-write-clear-and-specific-instructions写清楚和具体的说明"><a class="header" href="#principle-1-write-clear-and-specific-instructions写清楚和具体的说明">Principle 1: Write clear and specific instructions(写清楚和具体的说明)</a></h3>
+<h4 id="tactic-1-use-delimiters-to-clearly-indicate-distinct-parts-of-the-input使用定界符清楚地指示输入的不同部分"><a class="header" href="#tactic-1-use-delimiters-to-clearly-indicate-distinct-parts-of-the-input使用定界符清楚地指示输入的不同部分">Tactic 1: Use delimiters to clearly indicate distinct parts of the input(使用定界符清楚地指示输入的不同部分)</a></h4>
+<ul>
+<li>分隔符可以是任何东西:</li>
+</ul>
+<pre><code>```, &quot;&quot;&quot;, &lt; &gt;, `&lt;tag&gt; &lt;/tag&gt;`, `:`
+</code></pre>
+<h5 id="英文案例"><a class="header" href="#英文案例">英文案例</a></h5>
+<pre><code class="language-python">text = f&quot;&quot;&quot;
+You should express what you want a model to do by \
+providing instructions that are as clear and \
+specific as you can possibly make them. \
+This will guide the model towards the desired output, \
+and reduce the chances of receiving irrelevant \
+or incorrect responses. Don't confuse writing a \
+clear prompt with writing a short prompt. \
+In many cases, longer prompts provide more clarity \
+and context for the model, which can lead to \
+more detailed and relevant outputs.
+&quot;&quot;&quot;
+prompt = f&quot;&quot;&quot;
+Summarize the text delimited by triple backticks \
+into a single sentence.
+```{text}```
+&quot;&quot;&quot;
+response = get_completion(prompt)
+print(response)
+</code></pre>
+<p>打印结果:</p>
+<pre><code class="language-ad-info">To guide a model towards the desired output and reduce the chances of irrelevant or incorrect responses, it is important to provide clear and specific instructions, which may be longer prompts that provide more clarity and context for the model.
+
+</code></pre>
+<h5 id="中文案例"><a class="header" href="#中文案例">中文案例</a></h5>
+<pre><code class="language-python">text = f&quot;&quot;&quot;
+您应该通过以下方式表达您希望模型执行的操作 \
+提供清晰明了尽可能具体的说明。\
+这将引导模型达到所需的输出，\
+并减少接收无关信息的机会 \
+或不正确的反应。 不要混淆写一个 \
+通过编写简短提示来清除提示。 \
+在许多情况下，更长的提示更清晰 \
+和模型的上下文，这可能导致更详细和相关的输出。
+&quot;&quot;&quot;
+prompt = f&quot;&quot;&quot;
+先把三重反引号分隔的文本翻译成英文,再 \
+成一个句子,然后翻译成中文。
+```{text}```
+&quot;&quot;&quot;
+response = get_completion(prompt)
+print(response)
+</code></pre>
+<p>结果:</p>
+<pre><code>You should express the actions you want the model to perform in a clear, concise, and specific manner. This will guide the model to achieve the desired output and reduce the chance of receiving irrelevant information or incorrect responses. Do not confuse writing a prompt with clearing a prompt by writing short prompts. In many cases, longer prompts are clearer and more relevant to the context of the model, which may result in more detailed and relevant output.
+
+您应该以清晰、简明、具体的方式表达您希望模型执行的操作。这将引导模型达到所需的输出，并减少接收无关信息或不正确反应的机会。不要混淆编写提示和清除提示的区别，通过编写更长的提示，更清晰地表达模型的上下文，这可能导致更详细和相关的输出。
+</code></pre>
+<p>小总结:</p>
+<ul>
+<li>英文效果会比中文效果,好太多</li>
+<li>自己文本翻译成中文: 叫它翻译成英文,然后总结成中文,发现输出效果比蹩脚翻译好</li>
+</ul>
+<h4 id="tactic-2-ask-for-a-structured-output要求结构化输出"><a class="header" href="#tactic-2-ask-for-a-structured-output要求结构化输出">Tactic 2: Ask for a structured output(要求结构化输出)</a></h4>
+<ul>
+<li>JSON, HTML,YAML, TOML,CSV,XML 等都支持</li>
+</ul>
+<h5 id="英文案例-1"><a class="header" href="#英文案例-1">英文案例</a></h5>
+<pre><code class="language-python">prompt = f&quot;&quot;&quot;
+Generate a list of three made-up book titles along \
+with their authors and genres.
+Provide them in JSON format with the following keys:
+book_id, title, author, genre.
+&quot;&quot;&quot;
+response = get_completion(prompt)
+print(response)
+</code></pre>
+<p>打印结果:</p>
+<pre><code class="language-js">[
+    {
+        book_id: 1,
+        title: &quot;The Lost City of Zorath&quot;,
+        author: &quot;Aria Blackwood&quot;,
+        genre: &quot;Fantasy&quot;,
+    },
+    {
+        book_id: 2,
+        title: &quot;The Last Hope&quot;,
+        author: &quot;Ethan Stone&quot;,
+        genre: &quot;Science Fiction&quot;,
+    },
+    {
+        book_id: 3,
+        title: &quot;The Secret of the Blue Moon&quot;,
+        author: &quot;Lila Rose&quot;,
+        genre: &quot;Mystery&quot;,
+    },
+];
+</code></pre>
+<h5 id="中文案例-1"><a class="header" href="#中文案例-1">中文案例</a></h5>
+<p>案列 1: 机翻效果(google 翻译): 当英文直译到中文的时候,</p>
+<pre><code class="language-python">prompt = f&quot;&quot;&quot;
+生成三个虚构的书名及其作者和类型的列表。 使用以下key, 以 JSON 格式提供它们：
+book_id, title, author, genre.
+&quot;&quot;&quot;
+response = get_completion(prompt)
+print(response)
+</code></pre>
+<p>打印结果:</p>
+<pre><code>1. {&quot;book_id&quot;: 1, &quot;title&quot;: &quot;The Last Heir&quot;, &quot;author&quot;: &quot;Avery Blackwood&quot;, &quot;genre&quot;: &quot;Fantasy&quot;}
+2. {&quot;book_id&quot;: 2, &quot;title&quot;: &quot;The Silent Witness&quot;, &quot;author&quot;: &quot;Evelyn Grey&quot;, &quot;genre&quot;: &quot;Mystery&quot;}
+3. {&quot;book_id&quot;: 3, &quot;title&quot;: &quot;The Lost City&quot;, &quot;author&quot;: &quot;Jackson Rivers&quot;, &quot;genre&quot;: &quot;Adventure&quot;}
+</code></pre>
+<p>案列 2: 人译效果</p>
+<pre><code class="language-python">prompt = f&quot;&quot;&quot;
+生成三个虚构的书名及其作者和类型的列表。 以 JSON 格式提供它们,key是下面这些：
+book_id, title, author, genre.
+&quot;&quot;&quot;
+response = get_completion(prompt)
+print(response)
+</code></pre>
+<p>打印结果:</p>
+<pre><code class="language-json">{
+    &quot;book_1&quot;: {
+        &quot;title&quot;: &quot;The Lost City&quot;,
+        &quot;author&quot;: &quot;Emily Jones&quot;,
+        &quot;genre&quot;: &quot;Adventure&quot;
+    },
+    &quot;book_2&quot;: {
+        &quot;title&quot;: &quot;The Last Hope&quot;,
+        &quot;author&quot;: &quot;David Lee&quot;,
+        &quot;genre&quot;: &quot;Science Fiction&quot;
+    },
+    &quot;book_3&quot;: {
+        &quot;title&quot;: &quot;The Secret Garden&quot;,
+        &quot;author&quot;: &quot;Sophie Chen&quot;,
+        &quot;genre&quot;: &quot;Fantasy&quot;
+    }
+}
+</code></pre>
+<p>对比一下这两句话:</p>
+<ol>
+<li>生成三个虚构的书名及其作者和类型的列表。 使用以下 key, 以 JSON 格式提供它们：</li>
+<li>生成三个虚构的书名及其作者和类型的列表。 以 JSON 格式提供它们,key 是下面这些：</li>
+</ol>
+<p>机翻的时候, 主变成了 <code>使用以下key</code>, 结果就导致生成了三个字符串.</p>
+<p>小总结:</p>
+<p>不一定要非要写英文,中文还可以达到一样的效果,但是要注意 英文翻译成中文的时候,有的时候会主次不对,导致结果也不理想</p>
+<blockquote>
+<p><code>我问GPT</code>: 英文翻译成中文,有的时候有种主次位置不对,是什么原因</p>
+</blockquote>
+<blockquote>
+<p><code>GPT答</code>: 这种主次位置不对的情况可能是因为直译式翻译造成的。英语和中文的表达方式有很大的区别，有些表达顺序在英语中很自然，但在中文中则需要调整顺序或者进行适当的改变。此外，还有些英文短语或者习惯用语在中文中可能没有对应的表达方式，需要进行意译或者解释。因此，在进行英文翻译成中文时，需要根据目标读者的背景、语言习惯和阅读习惯进行适当的调整，以使翻译更符合中文的表达习惯和阅读习惯。</p>
+</blockquote>
+<h4 id="tactic-3-ask-the-model-to-check-whether-conditions-are-satisfied要求模型检查条件是否满足"><a class="header" href="#tactic-3-ask-the-model-to-check-whether-conditions-are-satisfied要求模型检查条件是否满足">Tactic 3: Ask the model to check whether conditions are satisfied(要求模型检查条件是否满足)</a></h4>
+<h5 id="英文案例-1"><a class="header" href="#英文案例-1">英文案例 1:</a></h5>
+<pre><code class="language-python">text_1 = f&quot;&quot;&quot;
+Making a cup of tea is easy! First, you need to get some \
+water boiling. While that's happening, \
+grab a cup and put a tea bag in it. Once the water is \
+hot enough, just pour it over the tea bag. \
+Let it sit for a bit so the tea can steep. After a \
+few minutes, take out the tea bag. If you \
+like, you can add some sugar or milk to taste. \
+And that's it! You've got yourself a delicious \
+cup of tea to enjoy.
+&quot;&quot;&quot;
+prompt = f&quot;&quot;&quot;
+You will be provided with text delimited by triple quotes.
+If it contains a sequence of instructions, \
+re-write those instructions in the following format:
+
+Step 1 - ...
+Step 2 - …
+…
+Step N - …
+
+If the text does not contain a sequence of instructions, \
+then simply write \&quot;No steps provided.\&quot;
+
+\&quot;\&quot;\&quot;{text_1}\&quot;\&quot;\&quot;
+&quot;&quot;&quot;
+response = get_completion(prompt)
+print(&quot;Completion for Text 1:&quot;)
+print(response)
+</code></pre>
+<p>返回结果:</p>
+<pre><code class="language-js">Completion for Text 1:
+Step 1 - Get some water boiling.
+Step 2 - Grab a cup and put a tea bag in it.
+Step 3 - Once the water is hot enough, pour it over the tea bag.
+Step 4 - Let it sit for a bit so the tea can steep.
+Step 5 - After a few minutes, take out the tea bag.
+Step 6 - Add some sugar or milk to taste.
+Step 7 - Enjoy your delicious cup of tea!
+</code></pre>
+<h5 id="中文案例-1"><a class="header" href="#中文案例-1">中文案例 1</a></h5>
+<pre><code class="language-python">text_1 = f&quot;&quot;&quot;
+泡一杯茶很简单！ 首先，你需要把水烧开。
+当发生这种情况时，拿起一个杯子并在其中放入一个茶包。
+一旦水足够热，就把它倒在茶包上。
+让它静置一会儿，这样茶就可以陡峭了。
+几分钟后，取出茶包。
+如果你喜欢，你可以加一些糖或牛奶来调味。
+就是这样！ 您已经为自己准备了一杯美味的茶来享用。
+&quot;&quot;&quot;
+prompt = f&quot;&quot;&quot;
+您将获得由三重引号分隔的文本。
+如果它包含一系列步骤指令，\
+按照以下格式重写这些步骤指令：
+
+步骤 1 - ...
+步骤 2 - …
+…
+步骤 N - …
+
+如果文本不包含步骤指令，\
+然后简单地写下“没有提供步骤。”
+
+\&quot;\&quot;\&quot;{text_1}\&quot;\&quot;\&quot;
+&quot;&quot;&quot;
+response = get_completion(prompt)
+print(&quot;Completion for Text 1:&quot;)
+print(response)
+</code></pre>
+<p>返回结果:</p>
+<pre><code>Completion for Text 1:
+步骤 1 - 把水烧开。
+步骤 2 - 拿起一个杯子并在其中放入一个茶包。
+步骤 3 - 一旦水足够热，就把它倒在茶包上。
+步骤 4 - 让它静置一会儿，这样茶就可以陡峭了。
+步骤 5 - 几分钟后，取出茶包。
+步骤 6 - 如果你喜欢，你可以加一些糖或牛奶来调味。
+步骤 7 - 就是这样！ 您已经为自己准备了一杯美味的茶来享用。
+</code></pre>
+<h5 id="英文案例-2"><a class="header" href="#英文案例-2">英文案例 2:</a></h5>
+<pre><code class="language-python">text_2 = f&quot;&quot;&quot;
+The sun is shining brightly today, and the birds are \
+singing. It's a beautiful day to go for a \
+walk in the park. The flowers are blooming, and the \
+trees are swaying gently in the breeze. People \
+are out and about, enjoying the lovely weather. \
+Some are having picnics, while others are playing \
+games or simply relaxing on the grass. It's a \
+perfect day to spend time outdoors and appreciate the \
+beauty of nature.
+&quot;&quot;&quot;
+prompt = f&quot;&quot;&quot;
+You will be provided with text delimited by triple quotes.
+If it contains a sequence of instructions, \
+re-write those instructions in the following format:
+
+Step 1 - ...
+Step 2 - …
+…
+Step N - …
+
+If the text does not contain a sequence of instructions, \
+then simply write \&quot;No steps provided.\&quot;
+
+\&quot;\&quot;\&quot;{text_2}\&quot;\&quot;\&quot;
+&quot;&quot;&quot;
+response = get_completion(prompt)
+print(&quot;Completion for Text 2:&quot;)
+print(response)
+</code></pre>
+<p>返回结果:</p>
+<pre><code>Completion for Text 2:
+No steps provided.
+</code></pre>
+<h5 id="中文案例-2"><a class="header" href="#中文案例-2">中文案例 2</a></h5>
+<pre><code class="language-python">text_2 = f&quot;&quot;&quot;
+今天阳光灿烂，鸟儿在歌唱。
+这是去公园散步的好天气。
+鲜花盛开，树木在微风中轻轻摇曳。
+人们出门在外，享受着宜人的天气。
+有的在野餐，有的在玩游戏，有的在草地上放松。
+ 这是在户外度过时光并欣赏大自然之美的完美日子。
+&quot;&quot;&quot;
+prompt = f&quot;&quot;&quot;
+您将获得由三重引号分隔的文本。
+如果它包含一系列步骤指令，\
+按照以下格式重写这些步骤指令：
+
+步骤 1 - ...
+步骤 2 - …
+…
+步骤 N - …
+
+如果文本不包含步骤指令，\
+然后简单地写下“没有提供步骤。”
+
+\&quot;\&quot;\&quot;{text_2}\&quot;\&quot;\&quot;
+&quot;&quot;&quot;
+response = get_completion(prompt)
+print(&quot;Completion for Text 2:&quot;)
+print(response)
+</code></pre>
+<p>返回结果:</p>
+<pre><code>Completion for Text 2:
+没有提供步骤。
+</code></pre>
+<h4 id="tactic-4-few-shot-prompting少量提示"><a class="header" href="#tactic-4-few-shot-prompting少量提示">Tactic 4: &quot;Few-shot&quot; prompting(“少量”提示)</a></h4>
+<h5 id="英文案例-1-1"><a class="header" href="#英文案例-1-1">英文案例 1</a></h5>
+<pre><code class="language-python">prompt = f&quot;&quot;&quot;
+Your task is to answer in a consistent style.
+
+&lt;child&gt;: Teach me about patience.
+
+&lt;grandparent&gt;: The river that carves the deepest \
+valley flows from a modest spring; the \
+grandest symphony originates from a single note; \
+the most intricate tapestry begins with a solitary thread.
+
+&lt;child&gt;: Teach me about resilience.
+&quot;&quot;&quot;
+response = get_completion(prompt)
+print(response)
+</code></pre>
+<p>返回结果:</p>
+<pre><code>`&lt;grandparent&gt;`: Resilience is like a tree that bends with the wind but never breaks. It is the ability to bounce back from adversity and keep moving forward, even when things get tough. Just like a tree that grows stronger with each storm it weathers, resilience is a quality that can be developed and strengthened over time.
+</code></pre>
+<h5 id="中文案例-1-1"><a class="header" href="#中文案例-1-1">中文案例 1</a></h5>
+<pre><code class="language-python">prompt = f&quot;&quot;&quot;
+你的任务是以一致的风格回答。
+
+&lt;孩子&gt;：教我耐心。
+
+&lt;祖父母&gt;：雕刻最深的河流山谷从温和的泉水流出； 这最伟大的交响乐源于一个音符；最复杂的挂毯始于一根单独的线。
+
+&lt;孩子&gt;：教我韧性。
+&quot;&quot;&quot;
+response = get_completion(prompt)
+print(response)
+
+</code></pre>
+<p>返回结果:</p>
+<pre><code>&lt;祖父母&gt;：韧性就像一棵树，需要经历风吹雨打才能成长得更加坚强。每一次挫折都是一次锻炼，只有坚持不懈，才能在生命的道路上走得更远。
+</code></pre>
+<h3 id="principle-2-give-the-model-time-to-think"><a class="header" href="#principle-2-give-the-model-time-to-think">Principle 2: Give the model time to “think”</a></h3>
+<h4 id="tactic-11-specify-the-steps-required-to-complete-a-task指定完成任务所需的步骤"><a class="header" href="#tactic-11-specify-the-steps-required-to-complete-a-task指定完成任务所需的步骤">Tactic 1.1: Specify the steps required to complete a task(指定完成任务所需的步骤)</a></h4>
+<h5 id="英文案例-2"><a class="header" href="#英文案例-2">英文案例</a></h5>
+<pre><code class="language-python">text = f&quot;&quot;&quot;
+In a charming village, siblings Jack and Jill set out on \
+a quest to fetch water from a hilltop \
+well. As they climbed, singing joyfully, misfortune \
+struck—Jack tripped on a stone and tumbled \
+down the hill, with Jill following suit. \
+Though slightly battered, the pair returned home to \
+comforting embraces. Despite the mishap, \
+their adventurous spirits remained undimmed, and they \
+continued exploring with delight.
+&quot;&quot;&quot;
+# example 1
+prompt_1 = f&quot;&quot;&quot;
+Perform the following actions:
+1 - Summarize the following text delimited by triple \
+backticks with 1 sentence.
+2 - Translate the summary into French.
+3 - List each name in the French summary.
+4 - Output a json object that contains the following \
+keys: french_summary, num_names.
+
+Separate your answers with line breaks.
+
+Text:
+```{text}```
+&quot;&quot;&quot;
+response = get_completion(prompt_1)
+print(&quot;Completion for prompt 1:&quot;)
+print(response)
+</code></pre>
+<p>打印结果:</p>
+<pre><code>Completion for prompt 1:
+Two siblings, Jack and Jill, go on a quest to fetch water from a well on a hilltop, but misfortune strikes and they both tumble down the hill, returning home slightly battered but with their adventurous spirits undimmed.
+
+Deux frères et sœurs, Jack et Jill, partent en quête d'eau d'un puits sur une colline, mais un malheur frappe et ils tombent tous les deux de la colline, rentrant chez eux légèrement meurtris mais avec leurs esprits aventureux intacts.
+Noms: Jack, Jill.
+
+{
+  &quot;french_summary&quot;: &quot;Deux frères et sœurs, Jack et Jill, partent en quête d'eau d'un puits sur une colline, mais un malheur frappe et ils tombent tous les deux de la colline, rentrant chez eux légèrement meurtris mais avec leurs esprits aventureux intacts.&quot;,
+  &quot;num_names&quot;: 2
+}
+</code></pre>
+<h5 id="中文案例-2"><a class="header" href="#中文案例-2">中文案例</a></h5>
+<p>注意 ⚠️: 英文案例是,英文翻译为法语,中文案例是 中文翻译为英文</p>
+<pre><code class="language-python">text = f&quot;&quot;&quot;
+在一个迷人的村庄里，兄弟姐妹杰克和吉尔开始从山顶的井里打水。 当他们欢呼雀跃地向上爬时，不幸降临了——杰克被一块石头绊倒，从山上滚下，吉尔也跟着跌倒。 虽然受到了轻微的打击，但两人回到家后得到了安慰的拥抱。 尽管发生了事故，他们的冒险精神丝毫未减，继续愉快地探索。
+&quot;&quot;&quot;
+# example 1
+prompt_1 = f&quot;&quot;&quot;
+执行以下操作：
+1 - 总结下面用三重反引号分隔文本，用1个句子。
+2 - 将摘要翻译成英语。
+3 - 在英语摘要中列出每个名字。
+4 - 输出包含json 对象, 键值包含：french_summary、num_names。
+
+用换行符分隔你的答案。
+
+文本:
+```{text}```
+&quot;&quot;&quot;
+response = get_completion(prompt_1)
+print(&quot;Completion for prompt 1:&quot;)
+print(response)
+</code></pre>
+<p>返回结果:</p>
+<pre><code>Completion for prompt 1:
+1 - 兄弟姐妹在迷人的村庄里探险时，杰克不幸滚下山丘，但两人仍然保持冒险精神。
+
+2 - In a charming village, siblings Jack and Jill start fetching water from a well on top of a hill. Unfortunately, while climbing up with excitement, Jack trips on a rock and tumbles down the hill, with Jill following suit. Despite minor injuries, they receive comforting hugs upon returning home. Despite the accident, their adventurous spirit remains undiminished as they continue to explore happily.
+
+3 - Jack, Jill
+
+4 - {&quot;french_summary&quot;: &quot;Dans un charmant village, les frères et sœurs Jack et Jill commencent à chercher de l'eau d'un puits au sommet d'une colline. Malheureusement, alors qu'ils montent avec excitation, Jack trébuche sur un rocher et dévale la colline, suivi de Jill. Malgré des blessures mineures, ils reçoivent des câlins réconfortants en rentrant chez eux. Malgré l'accident, leur esprit d'aventure reste intact alors qu'ils continuent à explorer joyeusement.&quot;, &quot;num_names&quot;: 2}
+</code></pre>
+<h4 id="tactic-12-ask-for-output-in-a-specified-format请求指定格式的输出"><a class="header" href="#tactic-12-ask-for-output-in-a-specified-format请求指定格式的输出">Tactic 1.2 Ask for output in a specified format(请求指定格式的输出)</a></h4>
+<h5 id="英文案例-3"><a class="header" href="#英文案例-3">英文案例</a></h5>
+<pre><code class="language-python">prompt_2 = f&quot;&quot;&quot;
+Your task is to perform the following actions:
+1 - Summarize the following text delimited by
+  &lt;&gt; with 1 sentence.
+2 - Translate the summary into French.
+3 - List each name in the French summary.
+4 - Output a json object that contains the
+  following keys: french_summary, num_names.
+
+Use the following format:
+Text: &lt;text to summarize&gt;
+Summary: &lt;summary&gt;
+Translation: &lt;summary translation&gt;
+Names: &lt;list of names in Italian summary&gt;
+Output JSON: &lt;json with summary and num_names&gt;
+
+Text: &lt;{text}&gt;
+&quot;&quot;&quot;
+response = get_completion(prompt_2)
+print(&quot;\nCompletion for prompt 2:&quot;)
+print(response)
+</code></pre>
+<p>结果:</p>
+<pre><code>Completion for prompt 2:
+Summary: Jack and Jill go on a quest to fetch water, but misfortune strikes and they tumble down the hill, returning home slightly battered but with their adventurous spirits undimmed.
+Translation: Jack et Jill partent en quête d'eau, mais la malchance frappe et ils dégringolent la colline, rentrant chez eux légèrement meurtris mais avec leurs esprits aventureux intacts.
+Names: Jack, Jill
+Output JSON: {&quot;french_summary&quot;: &quot;Jack et Jill partent en quête d'eau, mais la malchance frappe et ils dégringolent la colline, rentrant chez eux légèrement meurtris mais avec leurs esprits aventureux intacts.&quot;, &quot;num_names&quot;: 2}
+</code></pre>
+<h5 id="中文案例-3"><a class="header" href="#中文案例-3">中文案例</a></h5>
+<pre><code class="language-python">text = f&quot;&quot;&quot;
+在一个迷人的村庄里，兄弟姐妹杰克和吉尔开始从山顶的井里打水。 当他们欢呼雀跃地向上爬时，不幸降临了——杰克被一块石头绊倒，从山上滚下，吉尔也跟着跌倒。 虽然受到了轻微的打击，但两人回到家后得到了安慰的拥抱。 尽管发生了事故，他们的冒险精神丝毫未减，继续愉快地探索。
+&quot;&quot;&quot;
+
+prompt_2 = f&quot;&quot;&quot;
+您的任务是执行以下操作：
+1 - 用一句话总结由&lt;&gt;分隔的内容
+2 - 将摘要翻译成英文。
+3 - 在英文摘要中列出每个名字。
+4 - 输出一个包含以下键：french_summary、num_names。
+
+请你使用以下格式：
+总结：&lt;要总结的文本&gt;
+摘要：&lt;摘要&gt;
+翻译：&lt;摘要翻译&gt;
+姓名：&lt;英语摘要中的姓名列表&gt;
+输出 JSON：&lt;带有french_summary和num_names的json&gt;
+
+内容: &lt;{text}&gt;
+&quot;&quot;&quot;
+response = get_completion(prompt_2)
+print(&quot;\nCompletion for prompt 2:&quot;)
+print(response)
+
+
+
+</code></pre>
+<p>结果:</p>
+<pre><code>Completion for prompt 2:
+总结：杰克和吉尔在山顶的井里打水时发生了意外，但他们的冒险精神未减，继续探索。
+摘要：在一个迷人的村庄里，兄弟姐妹杰克和吉尔开始从山顶的井里打水。 当他们欢呼雀跃地向上爬时，不幸降临了——杰克被一块石头绊倒，从山上滚下，吉尔也跟着跌倒。 虽然受到了轻微的打击，但两人回到家后得到了安慰的拥抱。 尽管发生了事故，他们的冒险精神丝毫未减，继续愉快地探索。
+翻译：In a charming village, siblings Jack and Jill started to fetch water from a well on top of a hill. Unfortunately, while they were climbing up with excitement, an accident happened - Jack tripped on a stone and rolled down the hill, with Jill falling down as well. Despite minor injuries, they received comforting hugs when they got back home. Despite the accident, their adventurous spirit remained undiminished as they continued to explore happily.
+姓名：Jack、Jill
+输出 JSON：{&quot;french_summary&quot;: &quot;Jack et Jill ont eu un accident en allant chercher de l'eau dans un puits sur une colline, mais leur esprit d'aventure est resté intact et ils ont continué à explorer joyeusement.&quot;, &quot;num_names&quot;: 2}
+</code></pre>
+<h4 id="tactic-2-instruct-the-model-to-work-out-its-own-solution-before-rushing-to-a-conclusion在匆忙下结论之前指示模型制定出自己的解决方案"><a class="header" href="#tactic-2-instruct-the-model-to-work-out-its-own-solution-before-rushing-to-a-conclusion在匆忙下结论之前指示模型制定出自己的解决方案">Tactic 2: Instruct the model to work out its own solution before rushing to a conclusion(在匆忙下结论之前指示模型制定出自己的解决方案)</a></h4>
+<h5 id="英文案例-4"><a class="header" href="#英文案例-4">英文案例</a></h5>
+<pre><code class="language-python">prompt = f&quot;&quot;&quot;
+Determine if the student's solution is correct or not.
+
+Question:
+I'm building a solar power installation and I need \
+ help working out the financials.
+- Land costs $100 / square foot
+- I can buy solar panels for $250 / square foot
+- I negotiated a contract for maintenance that will cost \
+me a flat $100k per year, and an additional $10 / square \
+foot
+What is the total cost for the first year of operations
+as a function of the number of square feet.
+
+Student's Solution:
+Let x be the size of the installation in square feet.
+Costs:
+1. Land cost: 100x
+2. Solar panel cost: 250x
+3. Maintenance cost: 100,000 + 100x
+Total cost: 100x + 250x + 100,000 + 100x = 450x + 100,000
+&quot;&quot;&quot;
+response = get_completion(prompt)
+print(response)
+</code></pre>
+<p>结果:</p>
+<pre><code>The student's solution is correct.
+</code></pre>
+<blockquote>
+<p>Note that the student's solution is actually not correct.
+We can fix this by instructing the model to work out its own solution first.</p>
+</blockquote>
+<h5 id="中文案例-4"><a class="header" href="#中文案例-4">中文案例</a></h5>
+<pre><code class="language-python">prompt = f&quot;&quot;&quot;
+判断学生的答案是否正确。
+
+问题：
+我正在建造一个太阳能装置，我需要帮助来计算财务费用。
+- 土地成本 100 美元/平方英尺
+- 我可以以 250 美元/平方英尺的价格购买太阳能电池板
+- 我协商了一份维护合同，每年将花费我 10 万美元，外加每平方英尺 10 美元
+运营第一年的总成本与平方英尺数的关系是多少？
+
+学生的解决方案：
+设x是以平方英尺为单位的安装尺寸。
+费用：
+1.土地成本：100x
+2.太阳能电池板成本：250x
+3.维护费用：100000+100x
+总成本：100x + 250x + 100,000 + 100x = 450x + 100000
+&quot;&quot;&quot;
+response = get_completion(prompt)
+print(response)
+
+</code></pre>
+<p>返回结果:</p>
+<pre><code>学生的答案是正确的。
+</code></pre>
+<p>但是实际上是错误的</p>
+<h5 id="英文修正案例"><a class="header" href="#英文修正案例">英文修正案例:</a></h5>
+<pre><code class="language-python">prompt = f&quot;&quot;&quot;
+Your task is to determine if the student's solution \
+is correct or not.
+To solve the problem do the following:
+- First, work out your own solution to the problem.
+- Then compare your solution to the student's solution \
+and evaluate if the student's solution is correct or not.
+Don't decide if the student's solution is correct until
+you have done the problem yourself.
+
+Use the following format:
+Question:
+```
+question here
+```
+Student's solution:
+```
+student's solution here
+```
+Actual solution:
+```
+steps to work out the solution and your solution here
+```
+Is the student's solution the same as actual solution \
+just calculated:
+```
+yes or no
+```
+Student grade:
+```
+correct or incorrect
+```
+
+Question:
+```
+I'm building a solar power installation and I need help \
+working out the financials.
+- Land costs $100 / square foot
+- I can buy solar panels for $250 / square foot
+- I negotiated a contract for maintenance that will cost \
+me a flat $100k per year, and an additional $10 / square \
+foot
+What is the total cost for the first year of operations \
+as a function of the number of square feet.
+```
+Student's solution:
+```
+Let x be the size of the installation in square feet.
+Costs:
+1. Land cost: 100x
+2. Solar panel cost: 250x
+3. Maintenance cost: 100,000 + 100x
+Total cost: 100x + 250x + 100,000 + 100x = 450x + 100,000
+```
+Actual solution:
+&quot;&quot;&quot;
+response = get_completion(prompt)
+print(response)
+</code></pre>
+<p>结果:</p>
+<pre><code>Let x be the size of the installation in square feet.
+
+Costs:
+1. Land cost: 100x
+2. Solar panel cost: 250x
+3. Maintenance cost: 100,000 + 10x
+
+Total cost: 100x + 250x + 100,000 + 10x = 360x + 100,000
+
+Is the student's solution the same as actual solution just calculated:
+No
+
+Student grade:
+Incorrect
+</code></pre>
+<h5 id="中文修正案例-1"><a class="header" href="#中文修正案例-1">中文修正案例 1:</a></h5>
+<pre><code class="language-python">prompt = f&quot;&quot;&quot;
+您的任务是确定学生的解决方案是否正确。要解决此问题，请执行以下操作：
+- 首先，找出你自己的解决方案。
+- 然后将您的解决方案与学生的解决方案进行比较，并评估学生的解决方案是否正确。
+在您自己完成问题之前，不要判断学生的解决方案是否正确。
+
+使用以下格式：
+
+问题：
+```
+在这里提问
+```
+学生的解决方案：
+```
+学生的解决方案在这里
+```
+实际解决方案：
+```
+在此处制定解决方案和您的解决方案的步骤
+```
+学生的解是否与刚刚计算的实际解决方案相同：
+```
+是还是不是
+```
+学生回答结果：
+```
+正确或不正确
+```
+
+问题：
+我正在建造一个太阳能装置，我需要帮助来计算财务费用。
+- 土地成本 100 美元/平方英尺
+- 我可以以 250 美元/平方英尺的价格购买太阳能电池板
+- 我协商了一份维护合同，每年将花费我10万美元，同时外加每平方英尺10美元
+
+运营第一年的总成本与平方英尺数的关系是多少？
+
+
+学生的解决方案：
+```
+设x是以平方英尺为单位的安装尺寸。
+费用：
+1.土地成本：100x
+2.太阳能电池板成本：250x
+3.维护费用：100000+100x
+总成本：100x + 250x + 100,000 + 100x = 450x + 100000
+```
+
+&quot;&quot;&quot;
+response = get_completion(prompt)
+print(response)
+</code></pre>
+<p>返回结果:</p>
+<pre><code>实际解决方案：
+- 运营第一年的总成本应该是土地成本、太阳能电池板成本和维护费用的总和。
+- 土地成本为100美元/平方英尺，因此总土地成本为100x。
+- 太阳能电池板成本为250美元/平方英尺，因此总太阳能电池板成本为250x。
+- 维护费用为每平方英尺10美元，因此总维护费用为10x+100000。
+- 因此，总成本为100x+250x+10x+100000=360x+100000。
+
+学生的解是否与刚刚计算的实际解决方案相同：
+是
+
+学生回答结果：
+正确
+</code></pre>
+<p>学生方案:<code>总成本：100x + 250x + 100,000 + 100x = 450x + 100000</code>
+chatgpt 方案: <code>总成本为100x+250x+10x+100000=360x+100000</code>
+结果明显不同,回答还是说学生正确</p>
+<p>修复流程:</p>
+<ul>
+<li>拿着结果,返回逻辑的流程,看哪一步表达导致它搞错</li>
+</ul>
+<p>返回结果,发现: <code>学生的解是否与刚刚计算的实际解决方案相同</code> 这一步有问题,我们就描述详细一点
+, 改成: <code>学生的解是否与刚刚计算的实际解决方案相同, 对比一下,如果一样就是,否则就不是：</code></p>
+<h5 id="中文修正案例-2"><a class="header" href="#中文修正案例-2">中文修正案例 2:</a></h5>
+<pre><code class="language-python">prompt = f&quot;&quot;&quot;
+您的任务是确定学生的解决方案是否正确。要解决此问题，请执行以下操作：
+- 首先，找出你自己的解决方案。
+- 然后将您的解决方案与学生的解决方案进行比较，并评估学生的解决方案是否正确。
+在您自己完成问题之前，不要判断学生的解决方案是否正确。
+
+使用以下格式：
+
+问题：
+```
+在这里提问
+```
+学生的解决方案：
+```
+学生的解决方案在这里
+```
+实际解决方案：
+```
+在此处制定解决方案和您的解决方案的步骤
+```
+学生的解是否与刚刚计算的实际解决方案相同, 对比一下,如果一样就是,否则就不是：
+```
+是还是不是
+```
+学生回答结果：
+```
+正确或不正确
+```
+
+问题：
+我正在建造一个太阳能装置，我需要帮助来计算财务费用。
+- 土地成本 100 美元/平方英尺
+- 我可以以 250 美元/平方英尺的价格购买太阳能电池板
+- 我协商了一份维护合同，每年将花费我10万美元，同时外加每平方英尺10美元
+
+运营第一年的总成本与平方英尺数的关系是多少？
+
+
+学生的解决方案：
+```
+设x是以平方英尺为单位的安装尺寸。
+费用：
+1.土地成本：100x
+2.太阳能电池板成本：250x
+3.维护费用：100000+100x
+总成本：100x + 250x + 100,000 + 100x = 450x + 100000
+```
+
+&quot;&quot;&quot;
+response = get_completion(prompt)
+print(response)
+</code></pre>
+<p>返回结果:</p>
+<pre><code>实际解决方案：
+- 运营第一年的总成本应该是土地成本、太阳能电池板成本和维护费用的总和。
+- 土地成本为 100 美元/平方英尺，假设安装尺寸为 x 平方英尺，则土地成本为 100x 美元。
+- 太阳能电池板成本为 250 美元/平方英尺，假设安装尺寸为 x 平方英尺，则太阳能电池板成本为 250x 美元。
+- 维护费用为每平方英尺 10 美元，假设安装尺寸为 x 平方英尺，则维护费用为 10x 美元。另外，每年还需要支付 10 万美元的维护费用。
+- 因此，运营第一年的总成本为 100x + 250x + 10x + 100000 = 360x + 100000 美元。
+
+学生的解是否与刚刚计算的实际解决方案相同, 对比一下,如果一样就是,否则就不是：
+不是
+
+学生回答结果：
+不正确
+</code></pre>
+<p>最后得到了我们满意的结果:</p>
+<h2 id="模型局限性幻觉"><a class="header" href="#模型局限性幻觉">模型局限性：幻觉</a></h2>
+<h5 id="英文案例-5"><a class="header" href="#英文案例-5">英文案例</a></h5>
+<ul>
+<li>Boie 是一家真实的公司，产品名称不是真实的。</li>
+</ul>
+<pre><code class="language-python">prompt = f&quot;&quot;&quot;
+Tell me about AeroGlide UltraSlim Smart Toothbrush by Boie
+&quot;&quot;&quot;
+response = get_completion(prompt)
+print(response)
+</code></pre>
+<p>返回结果</p>
+<pre><code>The AeroGlide UltraSlim Smart Toothbrush by Boie is a high-tech toothbrush that uses advanced sonic technology to provide a deep and thorough clean. It features a slim and sleek design that makes it easy to hold and maneuver, and it comes with a range of smart features that help you optimize your brushing routine.
+
+One of the key features of the AeroGlide UltraSlim Smart Toothbrush is its advanced sonic technology, which uses high-frequency vibrations to break up plaque and bacteria on your teeth and gums. This technology is highly effective at removing even the toughest stains and buildup, leaving your teeth feeling clean and refreshed.
+
+In addition to its sonic technology, the AeroGlide UltraSlim Smart Toothbrush also comes with a range of smart features that help you optimize your brushing routine. These include a built-in timer that ensures you brush for the recommended two minutes, as well as a pressure sensor that alerts you if you're brushing too hard.
+
+Overall, the AeroGlide UltraSlim Smart Toothbrush by Boie is a highly advanced and effective toothbrush that is perfect for anyone looking to take their oral hygiene to the next level. With its advanced sonic technology and smart features, it provides a deep and thorough clean that leaves your teeth feeling fresh and healthy.
+</code></pre>
+<h5 id="中文案例-5"><a class="header" href="#中文案例-5">中文案例</a></h5>
+<ul>
+<li>字节跳动没有文心一言</li>
+</ul>
+<pre><code class="language-python">prompt = f&quot;&quot;&quot;
+告诉我,关于字节跳动的文心一言做了哪些创举&quot;&quot;&quot;
+response = get_completion(prompt)
+print(response)
+</code></pre>
+<p>返回结果:</p>
+<pre><code>字节跳动的文心一言是一款基于AI技术的智能写作工具，它可以帮助用户快速生成高质量的文章。以下是文心一言的一些创举：
+
+1. 首创AI写作技术：文心一言是全球首款基于AI技术的智能写作工具，它可以根据用户输入的关键词和主题，自动生成高质量的文章。
+
+2. 支持多种语言：文心一言支持多种语言，包括中文、英文、日文、韩文等，可以满足不同用户的需求。
+
+3. 提供多种写作模板：文心一言提供多种写作模板，包括新闻报道、科技文章、商业分析等，用户可以根据自己的需求选择合适的模板。
+
+4. 支持多种输出格式：文心一言支持多种输出格式，包括Word、PDF、HTML等，用户可以根据自己的需求选择合适的输出格式。
+
+5. 提供多种写作辅助功能：文心一言提供多种写作辅助功能，包括关键词提取、段落优化、语法检查等，可以帮助用户提高文章质量。
+
+总之，文心一言是一款非常实用的智能写作工具，它的出现为用户提供了一种全新的写作方式，可以帮助用户快速生成高质量的文章。
+</code></pre>
+<p>小结: 通过上面的案例,我们可以看到,模型的局限性,就是它只能根据你的输入,来生成一个结果,但是它并不知道这个结果是否正确,所以,我们需要自己来判断,这个结果是否正确.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="iterative迭代"><a class="header" href="#iterative迭代">Iterative(迭代)</a></h1>
+<p>WIP</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="summarizing摘要"><a class="header" href="#summarizing摘要">Summarizing(摘要)</a></h1>
+<p>WIP</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="inferring推理"><a class="header" href="#inferring推理">Inferring(推理)</a></h1>
+<p>WIP</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="transforming转换"><a class="header" href="#transforming转换">Transforming(转换)</a></h1>
+<p>WIP</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="expanding扩展"><a class="header" href="#expanding扩展">Expanding(扩展)</a></h1>
+<p>WIP</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="chatbot聊天机器人"><a class="header" href="#chatbot聊天机器人">Chatbot(聊天机器人)</a></h1>
+<p>WIP</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="conclusion总结"><a class="header" href="#conclusion总结">Conclusion(总结)</a></h1>
+<p>WIP</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="theme/js/custom.js"></script>
+
+        <script>
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+    </div>
+    </body>
+</html>
