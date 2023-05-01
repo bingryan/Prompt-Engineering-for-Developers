@@ -246,7 +246,7 @@ Place the description in a <div> element.
 从结果上看,返回我们需要的维度数据,并返回我们要的HTML格式
 
 
-## 总结
+## 本节小结
 本节主要是吴恩达老师拿一个椅子的说明书, 通过不断增加描述来生成我们需要的结果.可以说是对上一节Guidelines(指南)的一个实践. 他强调写prompt的过程和机器学习训练的过程一样,需要不断的更新迭代以获得我们期望的结果:
 - Be clear and specific
 - Analyze why result does not give desired output.
