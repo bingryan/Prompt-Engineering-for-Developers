@@ -1235,7 +1235,7 @@ Place the description in a &lt;div&gt; element.
 &lt;/div&gt;
 </code></pre>
 <p>从结果上看,返回我们需要的维度数据,并返回我们要的HTML格式</p>
-<h2 id="总结"><a class="header" href="#总结">总结</a></h2>
+<h2 id="本节小结"><a class="header" href="#本节小结">本节小结</a></h2>
 <p>本节主要是吴恩达老师拿一个椅子的说明书, 通过不断增加描述来生成我们需要的结果.可以说是对上一节Guidelines(指南)的一个实践. 他强调写prompt的过程和机器学习训练的过程一样,需要不断的更新迭代以获得我们期望的结果:</p>
 <ul>
 <li>Be clear and specific</li>
@@ -1451,7 +1451,7 @@ for i in range(len(reviews)):
 
 3 Mixed review of a blender system with price gouging and decreased quality, but helpful tips for use.
 </code></pre>
-<h2 id="本节总结"><a class="header" href="#本节总结">本节总结</a></h2>
+<h2 id="本节小结-1"><a class="header" href="#本节小结-1">本节小结</a></h2>
 <p>本节一个场景是在信息过载的今天,如何通过编写prompt来精简信息,减少我们获取信息的时间成本</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="inferring推理"><a class="header" href="#inferring推理">Inferring(推理)</a></h1>
 <p>推理指的是模型将文本作为输入，并且执行某种分析.可能是提取标签，提取名称，理解一段文字的情感.提炼情感是正面还是负面. 在传统的机器学习工作流程:收集标签数据集，训练模型, 部署模型,然后推理. 而且还不具有通用性. 比如情感和提取名词模型不通用, 必须单独部署每个任务模型. </p>
@@ -1700,7 +1700,7 @@ if topic_dict['nasa'] == 1:
 <p>返回结果:</p>
 <pre><code>ALERT: New NASA story!
 </code></pre>
-<h2 id="本节总结-1"><a class="header" href="#本节总结-1">本节总结</a></h2>
+<h2 id="本节小结-2"><a class="header" href="#本节小结-2">本节小结</a></h2>
 <p>本节主要是通过编写prompt来实现我们想要的推理,比如分析评论的情绪正面还是负面,高兴还是愤怒. 同时按照prompt输出我们想要的内容与格式, 然后我们可以根据输出内容再做一进步的判断作为我们应用的关键逻辑点
 总的来说,与传统的机器学习中一个模型对应一个场景对比,大语言模型提供了前所未有的通用性: 一个模型、一个 API 来完成许多不同的任务</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="transforming转换"><a class="header" href="#transforming转换">Transforming(转换)</a></h1>
@@ -1943,7 +1943,7 @@ display(Markdown(response))
   &quot;sentiment&quot;: &quot;Positive&quot;
 }
 </code></pre>
-<h2 id="本节小结"><a class="header" href="#本节小结">本节小结</a></h2>
+<h2 id="本节小结-3"><a class="header" href="#本节小结-3">本节小结</a></h2>
 <p>大语言模型在转换上相对于传统的机器学习中的转换提供了非常大的便利, 只需更改一个prompt词就改变了输出格式, 同时在语言转换上的也是更具有通用性</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="expanding扩展"><a class="header" href="#expanding扩展">Expanding(扩展)</a></h1>
 <p>本节讲的是调节模型中的<code>temperature</code>参数来获得不一样的结果, <a href="https://platform.openai.com/docs/api-reference/completions/create#completions/create-temperature">open ai temperature</a> 定义:</p>
@@ -2110,7 +2110,7 @@ Sincerely,
 AI customer agent
 </code></pre>
 <p>你会发现每次运行出来的结果是不一样的</p>
-<h2 id="本节小结-1"><a class="header" href="#本节小结-1">本节小结</a></h2>
+<h2 id="本节小结-4"><a class="header" href="#本节小结-4">本节小结</a></h2>
 <p>本节主要是讲的temperature参数,它是一个0-2的一个参数, 越小确定性越强,越大随性越大,我们可以更加我们的场景来定义该参数以获得我们想要的效果</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="chatbot聊天机器人"><a class="header" href="#chatbot聊天机器人">Chatbot(聊天机器人)</a></h1>
 <p>WIP</p>
