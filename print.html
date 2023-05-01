@@ -1005,7 +1005,244 @@ print(response)
 </code></pre>
 <p>小结: 通过上面的案例,我们可以看到,模型的局限性,就是它只能根据你的输入,来生成一个结果,但是它并不知道这个结果是否正确,所以,我们需要自己来判断,这个结果是否正确.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="iterative迭代"><a class="header" href="#iterative迭代">Iterative(迭代)</a></h1>
-<p>WIP</p>
+<p>本节吴恩达老师讲到写prompting和机器学习有点像,第一次成功的概率非常低,要不断的迭代更新.
+<img src="ChatGPT-Prompt-Engineering-for-Developers/attachment/be66226fe38b4c6ce1fd7b0fac5f2ce2.png" alt="" /></p>
+<center style="font-size:14px;color:#C0C0C0;text-decoration:underline">机器学习过程</center> 
+<p><img src="ChatGPT-Prompt-Engineering-for-Developers/attachment/a751fac89d2e3c7374331c9c9435b81f.png" alt="" /></p>
+<center style="font-size:14px;color:#C0C0C0;text-decoration:underline">写prompting过程</center> 
+<p>接下来做一个实验: 拿一个椅子的产品说明书,生成各种文案</p>
+<h2 id="generate-a-marketing-product-description-from-a-product-fact-sheet从产品说明书生成营销产品描述"><a class="header" href="#generate-a-marketing-product-description-from-a-product-fact-sheet从产品说明书生成营销产品描述">Generate a marketing product description from a product fact sheet(从产品说明书生成营销产品描述)</a></h2>
+<pre><code class="language-python">fact_sheet_chair = &quot;&quot;&quot;
+OVERVIEW
+- Part of a beautiful family of mid-century inspired office furniture, 
+including filing cabinets, desks, bookcases, meeting tables, and more.
+- Several options of shell color and base finishes.
+- Available with plastic back and front upholstery (SWC-100) 
+or full upholstery (SWC-110) in 10 fabric and 6 leather options.
+- Base finish options are: stainless steel, matte black, 
+gloss white, or chrome.
+- Chair is available with or without armrests.
+- Suitable for home or business settings.
+- Qualified for contract use.
+
+CONSTRUCTION
+- 5-wheel plastic coated aluminum base.
+- Pneumatic chair adjust for easy raise/lower action.
+
+DIMENSIONS
+- WIDTH 53 CM | 20.87”
+- DEPTH 51 CM | 20.08”
+- HEIGHT 80 CM | 31.50”
+- SEAT HEIGHT 44 CM | 17.32”
+- SEAT DEPTH 41 CM | 16.14”
+
+OPTIONS
+- Soft or hard-floor caster options.
+- Two choices of seat foam densities: 
+ medium (1.8 lb/ft3) or high (2.8 lb/ft3)
+- Armless or 8 position PU armrests 
+
+MATERIALS
+SHELL BASE GLIDER
+- Cast Aluminum with modified nylon PA6/PA66 coating.
+- Shell thickness: 10 mm.
+SEAT
+- HD36 foam
+
+COUNTRY OF ORIGIN
+- Italy
+&quot;&quot;&quot;
+
+prompt = f&quot;&quot;&quot;
+Your task is to help a marketing team create a 
+description for a retail website of a product based 
+on a technical fact sheet.
+
+Write a product description based on the information 
+provided in the technical specifications delimited by 
+triple backticks.
+
+Technical specifications: ```{fact_sheet_chair}```
+&quot;&quot;&quot;
+response = get_completion(prompt)
+print(response)
+</code></pre>
+<p>打印结果:</p>
+<pre><code>Introducing our stunning mid-century inspired office chair, the perfect addition to any home or business setting. Part of a beautiful family of office furniture, including filing cabinets, desks, bookcases, meeting tables, and more, this chair is available in several options of shell color and base finishes to suit your style. Choose from plastic back and front upholstery (SWC-100) or full upholstery (SWC-110) in 10 fabric and 6 leather options.
+
+The chair is constructed with a 5-wheel plastic coated aluminum base and features a pneumatic chair adjust for easy raise/lower action. It is available with or without armrests and is qualified for contract use. The base finish options are stainless steel, matte black, gloss white, or chrome.
+
+Measuring at a width of 53 cm, depth of 51 cm, and height of 80 cm, with a seat height of 44 cm and seat depth of 41 cm, this chair is designed for ultimate comfort. You can also choose between soft or hard-floor caster options and two choices of seat foam densities: medium (1.8 lb/ft3) or high (2.8 lb/ft3). The armrests are available in either an armless or 8 position PU option.
+
+The materials used in the construction of this chair are of the highest quality. The shell base glider is made of cast aluminum with modified nylon PA6/PA66 coating and has a shell thickness of 10 mm. The seat is made of HD36 foam, ensuring maximum comfort and durability.
+
+This chair is made in Italy and is the perfect combination of style and functionality. Upgrade your workspace with our mid-century inspired office chair today!
+</code></pre>
+<blockquote>
+<p>吴恩达老师认为描述太长, 所以希望简短一点</p>
+</blockquote>
+<h2 id="issue-1-the-text-is-too-long文字太长"><a class="header" href="#issue-1-the-text-is-too-long文字太长">Issue 1: The text is too long(文字太长)</a></h2>
+<ul>
+<li>Limit the number of words/sentences/characters(限制单词/句子/字符的数量。)</li>
+</ul>
+<p>于是prompt增加描述: <code>Use at most 50 words.</code></p>
+<pre><code class="language-python">prompt = f&quot;&quot;&quot;
+Your task is to help a marketing team create a 
+description for a retail website of a product based 
+on a technical fact sheet.
+
+Write a product description based on the information 
+provided in the technical specifications delimited by 
+triple backticks.
+
+Use at most 50 words.
+
+Technical specifications: ```{fact_sheet_chair}```
+&quot;&quot;&quot;
+response = get_completion(prompt)
+print(response)
+
+</code></pre>
+<p>返回结果:</p>
+<pre><code>Introducing our mid-century inspired office chair, perfect for home or business settings. Available in a range of shell colors and base finishes, with or without armrests. Choose from 10 fabric and 6 leather options for full or plastic upholstery. With a 5-wheel base and pneumatic chair adjust, it's both stylish and functional. Made in Italy.
+</code></pre>
+<blockquote>
+<p>结果确实减少了很多,同时强调了,我们加了50个单词的限制, 但是返回结果应该可能是40多,60都有可能, 但是这个结果是可以接受的</p>
+</blockquote>
+<h2 id="issue-2-text-focuses-on-the-wrong-details文本聚焦于错误的细节"><a class="header" href="#issue-2-text-focuses-on-the-wrong-details文本聚焦于错误的细节">Issue 2. Text focuses on the wrong details(文本聚焦于错误的细节)</a></h2>
+<ul>
+<li>Ask it to focus on the aspects that are relevant to the intended audience.(让它专注于与目标受众相关的方面。)</li>
+</ul>
+<blockquote>
+<p>希望返回更多关于椅子的技术细节和材料,用于经销商文案, 给prompt增加精确的关于技术细节的描述</p>
+</blockquote>
+<p>增加描述:</p>
+<pre><code class="language-js">The description is intended for furniture retailers, 
+so should be technical in nature and focus on the 
+materials the product is constructed from.
+</code></pre>
+<p>于是prompt更新为:</p>
+<pre><code class="language-python">prompt = f&quot;&quot;&quot;
+Your task is to help a marketing team create a 
+description for a retail website of a product based 
+on a technical fact sheet.
+
+Write a product description based on the information 
+provided in the technical specifications delimited by 
+triple backticks.
+
+The description is intended for furniture retailers, 
+so should be technical in nature and focus on the 
+materials the product is constructed from.
+
+Use at most 50 words.
+
+Technical specifications: ```{fact_sheet_chair}```
+&quot;&quot;&quot;
+response = get_completion(prompt)
+print(response)
+</code></pre>
+<p>返回结果:</p>
+<pre><code>Introducing our mid-century inspired office chair, perfect for both home and business settings. With a range of shell colors and base finishes, including stainless steel and matte black, this chair is available with or without armrests. The 5-wheel plastic coated aluminum base and pneumatic chair adjust make it easy to move and adjust to your desired height. Made with high-quality materials, including a cast aluminum shell and HD36 foam seat, this chair is built to last.
+</code></pre>
+<p>从结果上看,返回了更多关于材料上的说明</p>
+<blockquote>
+<p>希望返回产品ID</p>
+</blockquote>
+<p>增加描述:</p>
+<pre><code class="language-js">At the end of the description, include every 7-character 
+Product ID in the technical specification.
+</code></pre>
+<p>于是prompt更新为:</p>
+<pre><code class="language-python">prompt = f&quot;&quot;&quot;
+Your task is to help a marketing team create a 
+description for a retail website of a product based 
+on a technical fact sheet.
+
+Write a product description based on the information 
+provided in the technical specifications delimited by 
+triple backticks.
+
+The description is intended for furniture retailers, 
+so should be technical in nature and focus on the 
+materials the product is constructed from.
+
+At the end of the description, include every 7-character 
+Product ID in the technical specification.
+
+Use at most 50 words.
+
+Technical specifications: ```{fact_sheet_chair}```
+&quot;&quot;&quot;
+response = get_completion(prompt)
+print(response)
+</code></pre>
+<p>返回结果:</p>
+<pre><code>Introducing our mid-century inspired office chair, perfect for home or business settings. With a range of shell colors and base finishes, and the option of plastic or full upholstery in various fabrics and leathers, this chair is both stylish and versatile. Constructed with a 5-wheel plastic coated aluminum base and pneumatic chair adjust, it's also practical. Available with or without armrests and suitable for contract use. Product IDs: SWC-100, SWC-110.
+</code></pre>
+<p>从结果上看,返回了关于ID的描述</p>
+<h2 id="issue-3-description-needs-a-table-of-dimensions描述需要尺寸表"><a class="header" href="#issue-3-description-needs-a-table-of-dimensions描述需要尺寸表">Issue 3. Description needs a table of dimensions(描述需要尺寸表)</a></h2>
+<ul>
+<li>Ask it to extract information and organize it in a table.(让它提取信息并将其整理成表格。)</li>
+</ul>
+<blockquote>
+<p>希望它可以生成我们需要的维度数据和返回格式,比如HTML</p>
+</blockquote>
+<p>增加描述:</p>
+<pre><code class="language-js">After the description, include a table that gives the 
+product's dimensions. The table should have two columns.
+In the first column include the name of the dimension. 
+In the second column include the measurements in inches only.
+
+Give the table the title 'Product Dimensions'.
+
+Format everything as HTML that can be used in a website. 
+Place the description in a &lt;div&gt; element.
+</code></pre>
+<p>返回结果:</p>
+<pre><code>&lt;div&gt;
+&lt;h2&gt;Mid-Century Inspired Office Chair&lt;/h2&gt;
+&lt;p&gt;Introducing our mid-century inspired office chair, part of a beautiful family of office furniture that includes filing cabinets, desks, bookcases, meeting tables, and more. This chair is available in several options of shell color and base finishes, allowing you to customize it to your liking. You can choose between plastic back and front upholstery or full upholstery in 10 fabric and 6 leather options. The base finish options are stainless steel, matte black, gloss white, or chrome. The chair is also available with or without armrests, making it suitable for both home and business settings. Plus, it's qualified for contract use, so you can trust its durability and quality.&lt;/p&gt;
+&lt;h3&gt;Construction&lt;/h3&gt;
+&lt;p&gt;The chair features a 5-wheel plastic coated aluminum base and a pneumatic chair adjust for easy raise/lower action. You can choose between soft or hard-floor caster options and two choices of seat foam densities: medium (1.8 lb/ft3) or high (2.8 lb/ft3). The chair is also available with armless or 8 position PU armrests.&lt;/p&gt;
+&lt;h3&gt;Materials&lt;/h3&gt;
+&lt;p&gt;The shell base glider is made of cast aluminum with modified nylon PA6/PA66 coating, and the shell thickness is 10 mm. The seat is made of HD36 foam, ensuring comfort and support.&lt;/p&gt;
+&lt;h3&gt;Product Dimensions&lt;/h3&gt;
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Width&lt;/td&gt;
+    &lt;td&gt;53 cm | 20.87&quot;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Depth&lt;/td&gt;
+    &lt;td&gt;51 cm | 20.08&quot;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Height&lt;/td&gt;
+    &lt;td&gt;80 cm | 31.50&quot;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Seat Height&lt;/td&gt;
+    &lt;td&gt;44 cm | 17.32&quot;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Seat Depth&lt;/td&gt;
+    &lt;td&gt;41 cm | 16.14&quot;&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+&lt;h3&gt;Product ID&lt;/h3&gt;
+&lt;p&gt;SWC-100, SWC-110&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+<p>从结果上看,返回我们需要的维度数据,并返回我们要的HTML格式</p>
+<h2 id="总结"><a class="header" href="#总结">总结</a></h2>
+<p>本节主要是吴恩达老师拿一个椅子的说明书, 通过不断增加描述来生成我们需要的结果.可以说是对上一节Guidelines(指南)的一个实践. 他强调写prompt的过程和机器学习训练的过程一样,需要不断的更新迭代以获得我们期望的结果:</p>
+<ul>
+<li>Be clear and specific</li>
+<li>Analyze why result does not give desired output.</li>
+<li>Refine the idea and the prompt</li>
+<li>Repeat</li>
+</ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="summarizing摘要"><a class="header" href="#summarizing摘要">Summarizing(摘要)</a></h1>
 <p>WIP</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="inferring推理"><a class="header" href="#inferring推理">Inferring(推理)</a></h1>
