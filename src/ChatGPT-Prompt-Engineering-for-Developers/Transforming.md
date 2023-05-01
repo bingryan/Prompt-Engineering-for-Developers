@@ -1,8 +1,6 @@
 # Transforming(转换)
 
-机器学习中Transforming是一个重要环节, 本节讲的Transforming重点是 从A格式转换到B格式, 或者A语言到B语言, 并提供检查和修复的功能
-
-以前我们在实现这些逻辑需要大量的转换逻辑, 正则表达. 现在只需要一条prompt
+机器学习中Transforming是一个重要环节, 本节讲的Transforming重点是 从A格式转换到B格式, 或者A语言到B语言, 并提供检查和修复的功能.以前我们在实现这些逻辑需要大量的转换逻辑, 正则表达. 现在只需要一条prompt
 
 
 ## Translation(翻译)

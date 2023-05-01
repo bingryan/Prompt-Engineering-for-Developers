@@ -12,6 +12,7 @@ We generally recommend altering this or `top_p` but not both.
 
 于是教程中说, 如果你想要做一些不可预测和更具创造性的结果那么你就把temperature调大, 如果你想做一些具有确定性或预测性的那么就把temperature调小
 
+
 本节实验是根据一个用户的评论来自定义回复邮件
 
 英文评论:
@@ -133,7 +134,9 @@ AI customer agent
 
 ## Remind the model to use details from the customer's email
 
+
 现在我们把`temperature=0.7`, 或者你设置其他参数来使每次运行的结果不一样:
+
 ````python
 prompt = f"""
 You are a customer service AI assistant.
