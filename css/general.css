@@ -1,6 +1,6 @@
 /* Base styles and content styles */
 
-@import 'variables.css';
+@import "variables.css";
 
 :root {
     /* Browser default font-size is 16px, this way 1 rem = 10px */
@@ -37,18 +37,39 @@ main {
 }
 
 /* Don't change font size in headers. */
-h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
+h1 code,
+h2 code,
+h3 code,
+h4 code,
+h5 code,
+h6 code {
     font-size: unset;
 }
 
-.left { float: left; }
-.right { float: right; }
-.boring { opacity: 0.6; }
-.hide-boring .boring { display: none; }
-.hidden { display: none !important; }
+.left {
+    float: left;
+}
+.right {
+    float: right;
+}
+.boring {
+    opacity: 0.6;
+}
+.hide-boring .boring {
+    display: none;
+}
+.hidden {
+    display: none !important;
+}
 
-h2, h3 { margin-top: 2.5em; }
-h4, h5 { margin-top: 2em; }
+h2,
+h3 {
+    margin-top: 2.5em;
+}
+h4,
+h5 {
+    margin-top: 2em;
+}
 
 .header + .header h3,
 .header + .header h4,
@@ -79,7 +100,9 @@ h6:target::before {
 .page {
     outline: 0;
     padding: 0 var(--page-padding);
-    margin-top: calc(0px - var(--menu-bar-height)); /* Compensate for the #menu-bar-hover-placeholder */
+    margin-top: calc(
+        0px - var(--menu-bar-height)
+    ); /* Compensate for the #menu-bar-hover-placeholder */
 }
 .page-wrapper {
     box-sizing: border-box;
@@ -97,12 +120,46 @@ h6:target::before {
     margin-right: auto;
     max-width: var(--content-max-width);
 }
-.content p { line-height: 1.45em; }
-.content ol { line-height: 1.45em; }
-.content ul { line-height: 1.45em; }
-.content a { text-decoration: none; }
-.content a:hover { text-decoration: underline; }
-.content img, .content video { max-width: 100%; }
+.content p {
+    line-height: 1.45em;
+}
+.content ol {
+    line-height: 1.45em;
+}
+.content ul {
+    line-height: 1.45em;
+}
+.content a {
+    text-decoration: none;
+}
+.content a:hover {
+    text-decoration: underline;
+}
+.content ol {
+    background: #ff9999;
+    padding: 20px;
+}
+
+.content ul {
+    padding: 20px;
+}
+
+.content ol li {
+    background: #ffe5e5;
+    color: darkred;
+    padding: 5px;
+    margin-left: 35px;
+}
+
+.content ul li {
+    background: #cce5ff;
+    margin: 5px;
+}
+
+.content img,
+.content video {
+    max-width: 100%;
+}
 .content .header:link,
 .content .header:visited {
     color: var(--fg);
@@ -138,15 +195,14 @@ table tbody tr:nth-child(2n) {
     background: var(--table-alternate-bg);
 }
 
-
-blockquote {
+/* blockquote {
     margin: 20px 0;
     padding: 0 20px;
     color: var(--fg);
     background-color: var(--quote-bg);
-    border-top: .1em solid var(--quote-border);
-    border-bottom: .1em solid var(--quote-border);
-}
+    border-top: 0.1em solid var(--quote-border);
+    border-bottom: 0.1em solid var(--quote-border);
+} */
 
 kbd {
     background-color: var(--table-border-color);
@@ -178,7 +234,9 @@ kbd {
     visibility: hidden;
     color: #fff;
     background-color: #333;
-    transform: translateX(-50%); /* Center by moving tooltip 50% of its width left */
+    transform: translateX(
+        -50%
+    ); /* Center by moving tooltip 50% of its width left */
     left: -8px; /* Half of the width of the icon */
     top: -35px;
     font-size: 0.8em;
@@ -200,4 +258,22 @@ kbd {
 
 .result-no-output {
     font-style: italic;
+}
+
+/* blockquote */
+blockquote {
+    background: #f9f9f9;
+    border-left: 10px solid #ccc;
+    margin: 1.5em 10px;
+    padding: 0.5em 10px;
+    quotes: "\201C""\201D""\2018""\2019";
+}
+
+blockquote:before {
+    color: #ccc;
+    content: open-quote;
+    font-size: 4em;
+    line-height: 0.1em;
+    margin-right: 0.25em;
+    vertical-align: -0.4em;
 }

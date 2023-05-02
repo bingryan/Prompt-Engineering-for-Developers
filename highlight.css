@@ -9,7 +9,7 @@
 /* Comment */
 .hljs-comment,
 .hljs-quote {
-  color: #575757;
+    color: #575757;
 }
 
 /* Red */
@@ -23,7 +23,7 @@
 .hljs-name,
 .hljs-selector-id,
 .hljs-selector-class {
-  color: #d70025;
+    color: #d70025;
 }
 
 /* Orange */
@@ -34,49 +34,98 @@
 .hljs-literal,
 .hljs-type,
 .hljs-params {
-  color: #b21e00;
+    color: #b21e00;
 }
 
 /* Green */
 .hljs-string,
 .hljs-symbol,
 .hljs-bullet {
-  color: #008200;
+    color: #008200;
 }
 
 /* Blue */
 .hljs-title,
 .hljs-section {
-  color: #0030f2;
+    color: #0030f2;
 }
 
 /* Purple */
 .hljs-keyword,
 .hljs-selector-tag {
-  color: #9d00ec;
+    color: #9d00ec;
 }
 
 .hljs {
-  display: block;
-  overflow-x: auto;
-  background: #f6f7f6;
-  color: #000;
+    display: block;
+    overflow-x: auto;
+    background: #fbe842;
+    color: #000;
+}
+
+pre .hljs {
+    display: block;
+    overflow-x: auto;
+    background: #2d2d2d;
+    color: #adbac7;
 }
 
 .hljs-emphasis {
-  font-style: italic;
+    font-style: italic;
 }
 
 .hljs-strong {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 .hljs-addition {
-  color: #22863a;
-  background-color: #f0fff4;
+    color: #22863a;
+    background-color: #f0fff4;
 }
 
 .hljs-deletion {
-  color: #b31d28;
-  background-color: #ffeef0;
+    color: #b31d28;
+    background-color: #ffeef0;
+}
+
+pre {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    background: transparent;
+    box-shadow: 0 0px 10px 0px rgba(0, 0, 0, 0.4);
+}
+pre:hover {
+    transition: box-shadow 0.3s ease-in-out;
+    box-shadow: 0 0px 30px 0px rgba(0, 0, 0, 0.4);
+}
+pre::before {
+    height: 28px;
+    line-height: 38px;
+    background: #1c1c1c;
+    color: #eeffff;
+    font-size: 16px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    font-weight: bold;
+}
+pre::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    background: #fc625d;
+    width: 12px;
+    height: 12px;
+    top: 0;
+    left: 5px;
+    margin-top: 5px;
+    box-shadow: 20px 0px #fdbc40, 40px 0px #35cd4b;
+    z-index: 10;
+}
+pre code {
+    padding-top: 20px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
 }

@@ -85,39 +85,12 @@ code {
     word-wrap: break-word;
 }
 
-code.editable,
-.ace_scroller {
-    top: 10px;
-}
-
 .chapter li .md-viewed {
     color: #777;
 }
 
 ol .expanded {
     color: #722ed1;
-}
-/* code block */
-pre pre {
-    position: relative;
-    overflow: hidden;
-    border-radius: 10px;
-    background: transparent;
-    box-shadow: 0 0px 10px 0px rgba(0, 0, 0, 0.4);
-}
-pre pre:hover {
-    transition: box-shadow 0.3s ease-in-out;
-    box-shadow: 0 0px 30px 0px rgba(0, 0, 0, 0.4);
-}
-
-pre code {
-    white-space: pre-wrap;
-    word-wrap: break-word;
-}
-
-pre .result {
-    color: #9fdb1d;
-    background-color: #292b29;
 }
 
 /* 左侧栏设置 */
