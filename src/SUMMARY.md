@@ -21,3 +21,5 @@
 ---
 
 -   [Awesome Application](./Awesome/Application.md)
+-   [Awesome Resource](./Awesome/Resource.md)
+-   [TextToImage](./Awesome/TextToImage.md)
