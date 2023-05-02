@@ -5,12 +5,12 @@
 ## 教程
 ### ChatGPT Prompt Engineering for Developers
 
--   [Introduction(引言)](https://prompt-engineering-for-developers.wiki/ChatGPT-Prompt-Engineering-for-Developers/Introduction.md)
--   [Guidelines(指南)](https://prompt-engineering-for-developers.wiki/ChatGPT-Prompt-Engineering-for-Developers/Guidelines.md)
--   [Iterative(迭代)](https://prompt-engineering-for-developers.wiki/ChatGPT-Prompt-Engineering-for-Developers/Iterative.md)
--   [Summarizing(摘要)](https://prompt-engineering-for-developers.wiki/ChatGPT-Prompt-Engineering-for-Developers/Summarizing.md)
--   [Inferring(推理)](https://prompt-engineering-for-developers.wiki/ChatGPT-Prompt-Engineering-for-Developers/Inferring.md)
--   [Transforming(转换)](https://prompt-engineering-for-developers.wiki/ChatGPT-Prompt-Engineering-for-Developers/Transforming.md)
--   [Expanding(扩展)](https://prompt-engineering-for-developers.wiki/ChatGPT-Prompt-Engineering-for-Developers/Expanding.md)
--   [Chatbot(聊天机器人)](https://prompt-engineering-for-developers.wiki/ChatGPT-Prompt-Engineering-for-Developers/Chatbot.md)
--   [Conclusion(总结)](https://prompt-engineering-for-developers.wiki/ChatGPT-Prompt-Engineering-for-Developers/Conclusion.md)
+-   [Introduction(引言)](https://prompt-engineering-for-developers.wiki/ChatGPT-Prompt-Engineering-for-Developers/Introduction.html)
+-   [Guidelines(指南)](https://prompt-engineering-for-developers.wiki/ChatGPT-Prompt-Engineering-for-Developers/Guidelines.html)
+-   [Iterative(迭代)](https://prompt-engineering-for-developers.wiki/ChatGPT-Prompt-Engineering-for-Developers/Iterative.html)
+-   [Summarizing(摘要)](https://prompt-engineering-for-developers.wiki/ChatGPT-Prompt-Engineering-for-Developers/Summarizing.html)
+-   [Inferring(推理)](https://prompt-engineering-for-developers.wiki/ChatGPT-Prompt-Engineering-for-Developers/Inferring.html)
+-   [Transforming(转换)](https://prompt-engineering-for-developers.wiki/ChatGPT-Prompt-Engineering-for-Developers/Transforming.html)
+-   [Expanding(扩展)](https://prompt-engineering-for-developers.wiki/ChatGPT-Prompt-Engineering-for-Developers/Expanding.html)
+-   [Chatbot(聊天机器人)](https://prompt-engineering-for-developers.wiki/ChatGPT-Prompt-Engineering-for-Developers/Chatbot.html)
+-   [Conclusion(总结)](https://prompt-engineering-for-developers.wiki/ChatGPT-Prompt-Engineering-for-Developers/Conclusion.html)
