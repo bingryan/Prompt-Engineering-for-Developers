@@ -10,6 +10,7 @@
 -   [sturdy-dev/codereview.gpt](https://github.com/sturdy-dev/codereview.gpt): Reviews your Pull/Merge Requests using ChatGPT
 
 -   [cirolini/chatgpt-github-actions](https://github.com/cirolini/chatgpt-github-actions): automate code review using the ChatGPT language model
+-   [irgolic/AutoPR](https://github.com/irgolic/AutoPR): Fix issues with AI-generated pull requests, powered by ChatGPT
 
 ### VSCode
 
