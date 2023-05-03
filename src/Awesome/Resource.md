@@ -35,3 +35,5 @@
 [awesome-chatgpt-api](https://github.com/reorx/awesome-chatgpt-api): 精选的应用程序和工具列表，它们不仅使用新的 ChatGPT API，还允许用户配置自己的 API 密钥，从而可以免费和按需使用自己的配额
 
 [awesome-chatgpt-prompts](https://github.com/f/awesome-chatgpt-prompts): 包括 ChatGPT prompt，以便更好地使用 ChatGPT
+
+[taishi-i/awesome-ChatGPT-repositories](https://github.com/taishi-i/awesome-ChatGPT-repositories): 专用于与 ChatGPT 相关的开源 GitHub 存储库的精选资源列表

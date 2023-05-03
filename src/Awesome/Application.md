@@ -25,6 +25,10 @@
 -   [emailGPT](https://github.com/lucasmccabe/emailGPT): a quick and easy interface to generate emails with ChatGPT
 -   [summarize.site](https://github.com/clmnin/summarize.site): Summarize web pages using OpenAI ChatGPT
 -   [chatgpt-conversation](https://github.com/platelminto/chatgpt-conversation): Have a conversation with ChatGPT using your voice, and have it talk back
+-   [kaixindelele/chatpaper](https://github.com/kaixindelele/chatpaper): 全流程加速科研，利用chatgpt进行论文总结+润色+审稿+审稿回复
+-   [yihong0618/bilingual_book_maker](https://github.com/yihong0618/bilingual_book_maker): Make bilingual epub books Using AI translate
+-   [mikavehns/BookGPT](https://github.com/mikavehns/BookGPT): Writes complete books with given paramters, using GPT-3.
+
 
 
 ---
@@ -41,6 +45,7 @@
 -   [集成手机键盘的 AI 助手](https://www.zeeno.ai/)
 -   [预先写好 prompt 和其他应用集成](https://atua.app/)
 -   [集成 chatgpt 应用](https://www.chataiapps.com/)
+-   [Chat with any PDF](https://www.chatpdf.com/)
 
 ### Chrome
 
